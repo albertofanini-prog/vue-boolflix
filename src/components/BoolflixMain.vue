@@ -8,16 +8,19 @@
         <button @click="searchAPI(searchMovie)">
             Search
         </button>
-        <div
-        class="singleMovie"
-        v-for="movie in movies"
-        :key="movie.id"
-        >
-            <h3>{{movie.title}}</h3>
-            <h4>{{movie.original_title}}</h4>
-            <h6>{{movie.original_language}}</h6>
-            <h6>{{movie.vote_average}}</h6>
+        <div class="movies_container">
+            <div
+            class="singleMovie"
+            v-for="movie in movies"
+            :key="movie.id"
+            >
+                <h3>{{movie.title}}</h3>
+                <h4>{{movie.original_title}}</h4>
+                <h6>{{movie.original_language}}</h6>
+                <h6>{{movie.vote_average}}</h6>
+            </div>
         </div>
+
     </main>
 </template>
 
@@ -37,7 +40,7 @@ export default {
         searchAPI(input){
             this.searchMovie = input;
             axios.get(
-                `https://api.themoviedb.org/3/search/movie?api_key=21468023db35f90fc29dfeda12ec6478&language=en-US&query=`
+                `https://api.themoviedb.org/3/search/movie?api_key=21468023db35f90fc29dfeda12ec6478&language=it-IT&query=`
                 +   
                 this.searchMovie
                 +
