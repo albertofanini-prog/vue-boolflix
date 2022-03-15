@@ -14,10 +14,10 @@
             v-for="movie in movies"
             :key="movie.id"
             >
-                <h3>{{movie.title}}</h3>
-                <h4>{{movie.original_title}}</h4>
-                <h6>{{movie.original_language}}</h6>
-                <h6>{{movie.vote_average}}</h6>
+                <h1>{{movie.title}}</h1>
+                <h3>{{movie.original_title}}</h3>
+                <h4>Lingua originale: {{movie.original_language}}</h4>
+                <h4>Voto medio: {{movie.vote_average}}</h4>
             </div>
         </div>
 
@@ -33,28 +33,23 @@ export default {
     data(){
         return{
             searchMovie: '',
-            movies:[]
+            movies:[],
+            baseUrl: 'https://api.themoviedb.org/3'
         }
     },
     methods: {
         searchAPI(input){
             this.searchMovie = input;
-            axios.get(
-                `https://api.themoviedb.org/3/search/movie?api_key=21468023db35f90fc29dfeda12ec6478&language=it-IT&query=`
-                +   
-                this.searchMovie
-                +
-                `&page=1&include_adult=false`
-            )
+            axios.get( `${this.baseUrl}/search/movie`,{
+                params: {
+                    language: 'it-IT',
+                    api_key: '21468023db35f90fc29dfeda12ec6478',
+                    query: this.searchMovie,
+                }
+            })
             .then((response) =>{
                 this.movies = response.data.results;
             })
-            // ,{
-            //     params:{
-            //         apiKey: '21468023db35f90fc29dfeda12ec6478',
-            //         query: this.searchMovie,
-            //     }
-            // }
         }
     },
     // created(){
@@ -64,5 +59,27 @@ export default {
 </script>
 
 <style lang="scss">
-
+    .movies_container{
+        margin-top: 10px;
+        padding: 10px 20px;
+        width: 100%;
+        // border: 1px solid blue;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        .singleMovie{
+            // border: 1px solid red;
+            width: 23%;
+            padding: 15px;
+            background-color: #2c3e50;
+            border-radius: 25px;
+        } h1{
+            color: red;
+        } h1{
+            color: silver;
+        } h4{
+            color: gold;
+        }
+    }
 </style>
