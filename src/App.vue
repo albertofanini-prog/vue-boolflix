@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Netflix logo" src="./assets/logoNetflix.png">
+    <BoolflixMain/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BoolflixMain from './components/BoolflixMain.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    BoolflixMain
   }
 }
 </script>
@@ -23,6 +23,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  img{
+    max-width: 100px;
+    max-height: 100px;
+  };
 }
 </style>
