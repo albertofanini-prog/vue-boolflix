@@ -10,7 +10,7 @@
             >
             <button
             class="input_2"
-            @click="searchAPI(searchMovie)">
+            @click="searchMovieAPI(searchMovie); searchTvSerieAPI(searchTvSerie)">
             Search
             </button>
         <!-- </form>
@@ -22,13 +22,23 @@
             v-for="movie in movies"
             :key="movie.id"
             >
-                <h1>{{movie.title}}</h1>
+                <h2>{{movie.title}}</h2>
                 <h3>{{movie.original_title}}</h3>
-                <h4>Lingua originale: {{movie.original_language}}</h4>
+                <h4>Lingua originale: <img :src="'Flags/' + movie.original_language + '.svg'"></h4>
                 <h4>Voto medio: {{movie.vote_average}}</h4>
+                
+            </div>
+            <div
+            class="singleMovie"
+            v-for="serie in series"
+            :key="serie.id"
+            >
+                <h2>{{serie.name}}</h2>
+                <h3>{{serie.original_name}}</h3>
+                <h4>Lingua originale: <img :src="'Flags/' + movie.original_language + '.svg'"></h4>
+                <h4>Voto medio: {{serie.vote_average}}</h4>
             </div>
         </div>
-
     </main>
 </template>
 
@@ -41,18 +51,14 @@ export default {
     data(){
         return{
             searchMovie: '',
+            searchTvSerie: '',
             movies:[],
+            series:[],
             baseUrl: 'https://api.themoviedb.org/3',
-            flags:[
-                {
-                    country: "it",
-                    icon: "./assets/Flags/it.svg"
-                },
-            ]
         }
     },
     methods: {
-        searchAPI(input){
+        searchMovieAPI(input){
             this.searchMovie = input;
             axios.get( `${this.baseUrl}/search/movie`,{
                 params: {
@@ -63,6 +69,20 @@ export default {
             })
             .then((response) =>{
                 this.movies = response.data.results;
+            })
+        },
+        searchTvSerieAPI(input){
+            this.searchTvSerie = input;
+            axios.get( `${this.baseUrl}/search/tv`,{
+                params: {
+                    api_key: '21468023db35f90fc29dfeda12ec6478',
+                    query: this.searchMovie,
+                    language: this.flagShow,
+                }
+            })
+            .then((response) =>{
+                this.series = response.data.results;
+                console.log(response.data)
             })
         },
     },
@@ -137,7 +157,8 @@ export default {
         // border: 1px solid blue;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: flex-start;
+        align-items: center;
         gap: 10px;
         .singleMovie{
             // border: 1px solid red;
@@ -150,7 +171,7 @@ export default {
             align-items: center;
             gap: 5px;
             border: 4px solid white;
-        } h1{
+        } h2{
             color: red;
             height: 50%;
             background-color: none;
