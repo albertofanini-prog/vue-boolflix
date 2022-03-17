@@ -21,8 +21,8 @@
             class="singleMovie"
             v-for="movie in movies"
             :key="movie.id"
+            :style="{backgroundImage:`url(https://image.tmdb.org/t/p/w342${movie.poster_path})`}"
             >
-                <img class="poster" :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`" alt="">
                 <div class="movie_info">
                     <span id="title">
                         {{movie.title}}
@@ -43,32 +43,36 @@
                             &#9733;
                         </span>
                     </div>
-                </div>
-                <!-- <h2>{{movie.title}}</h2>
-                <h3>{{movie.original_title}}</h3>
-                <h4>Lingua originale: <img :src="'Flags/' + movie.original_language + '.svg'"></h4>
-                <div>Voto medio: 
-                    <span 
-                    :class="i < getMovieVoteAverage(movie) ? 'star' : ''"
-                    v-for="(starIcon, i) in 5"
-                    :key="i"
-                    >
-                    &#9733;
-                    </span>
-                </div> -->
-                
+                </div>                
             </div>
-            <!-- <div
+            <div
             class="singleMovie"
             v-for="serie in series"
             :key="serie.id"
+            :style="{backgroundImage:`url(https://image.tmdb.org/t/p/w342${serie.poster_path})`}"
             >
-                <img :src="`https://image.tmdb.org/t/p/w342${serie.poster_path}`" alt="serie.name">
-                <h2>{{serie.name}}</h2>
-                <h3>{{serie.original_name}}</h3>
-                <h4>Lingua originale: <img :src="'Flags/' + movie.original_language + '.svg'"></h4>
-                <h4>Voto medio: {{serie.vote_average}}</h4>
-            </div> -->
+                <div class="movie_info">
+                    <span id="title">
+                        {{serie.title}}
+                    </span>
+                    <span id="original_title">
+                        {{serie.original_title}}
+                    </span>
+                    <span id="original_language">
+                        <span> Lingua originale: </span><img class="flag" :src="'Flags/' + serie.original_language + '.svg'">
+                    </span>
+                    <div id="average_vote">
+                        Voto medio: 
+                        <span 
+                        :class="i < getMovieVoteAverage(serie) ? 'star' : ''"
+                        v-for="(starIcon, i) in 5"
+                        :key="i"
+                        >
+                            &#9733;
+                        </span>
+                    </div>
+                </div>                
+            </div>
         </div>
     </main>
 </template>
@@ -174,99 +178,97 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-    }
-    input{
-        height: 25px;
-        width: 15%;
-        margin-top: 10px;
-        margin-right: 10px;
-        border-radius: 999px;
-        padding: 10px;
-        background-color: white;
-    }
-    button{
-        height: 25px;
-        margin-top: 10px;
-        padding: 5px 10px;
-        border-radius: 999px;
-        cursor: pointer;
-        background-color: gray;
-    }
-    input:focus{
-    outline:none;
-    }
-    .movies_container{
-        margin-top: 10px;
-        // padding: 10px 20px;
-        width: 80%;
-        // border: 1px solid blue;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-        //border: 3px solid purple;
-        .singleMovie{
-            // border: 1px solid red;
-            width: calc((100% / 6) - 30px);
-            height: 350px;
-            // padding: 15px;
-            background-color: #1b1e23;
-            // //border-radius: 25px;
-            // display: flex;
-            // flex-direction: column;
-            // align-items: center;
-            // gap: 5px;
-            border: 4px solid white;
-            position: relative;
-            .poster {
-            width: 100%;
-            height: 100%;
-            // opacity: 0.2;
-        } .movie_info{
-            color: white;
-            position: absolute;
-            top: 10%;
-            left: 10%;
+        input{
+            height: 25px;
+            width: 15%;
+            margin-top: 10px;
+            margin-right: 10px;
+            border-radius: 999px;
+            padding: 10px;
+            background-color: white;
+            input:focus{
+            outline:none;
+            }
+        }
+        button{
+            height: 25px;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            background-color: gray;
+        }
+        .movies_container{
+            margin-top: 10px;
+            // padding: 10px 20px;
+            width: 80%;
+            // border: 1px solid blue;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            display: none;
-            #title{
-            height: 30%;
-            font-size: 22px;
-            font-weight: 600;
-            padding: 5px;
-            } #original_title{
-            height: 20%;
-            font-size: 18px;
-            padding: 5px;
-            } #original_language{
-            height: 30%;
-            font-size: 14px;
-            padding: 5px;
-            display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-                span{
-                    padding: 5px;
+            gap: 30px;
+            //border: 3px solid purple;
+            .singleMovie{
+                // border: 1px solid red;
+                width: calc((100% / 4) - 30px);
+                height: 350px;
+                // padding: 15px;
+                background-color: #1b1e23;
+                // //border-radius: 25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                border: 4px solid white;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                .singleMovie:hover{
+                    background-color: black;
+                    opacity: 0.2;
                 }
-                img{
-                    max-width: 30%;
-                    max-height: 20%;
+                .movie_info{
+                    color: white;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    // display: none;
+                    #title{
+                        height: 30%;
+                        font-size: 22px;
+                        font-weight: 600;
+                        padding: 5px;
+                    }
+                    #original_title{
+                        height: 20%;
+                        font-size: 18px;
+                        padding: 5px;
+                    }
+                    #original_language{
+                        height: 30%;
+                        font-size: 14px;
+                        padding: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        span{
+                            padding: 5px;
+                        }
+                        img{
+                            max-width: 30%;
+                            max-height: 20%;
+                        }
+                    }
+                    #average_vote{
+                        height: 20%;
+                        .star{
+                            color: gold;
+                        }
+                    }
                 }
-            } #average_vote{
-                height: 20%;
             }
-        } .poster:hover{
-            opacity: 0.2;
-        } .movie_info:hover{
-            display: block;
         }
-    }
-}
-    .star{
-        color: gold;
     }
 </style>
