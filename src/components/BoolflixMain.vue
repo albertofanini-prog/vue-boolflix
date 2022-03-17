@@ -1,20 +1,18 @@
 <template>
     <main>
-        <!-- <div class="form_container">
-        <form action=""> -->
+        <div class="form_container">
             <input
-            class="input_1"
-            type="text"
-            placeholder="Scrivi qua..."
-            v-model="searchMovie"
+                class="input_1"
+                type="text"
+                placeholder="Scrivi qua..."
+                v-model="searchMovie"
             >
             <button
-            class="input_2"
-            @click="searchMovieAPI(searchMovie); searchTvSerieAPI(searchTvSerie)">
-            Search
+                class="input_2"
+                @click="searchMovieAPI(searchMovie); searchTvSerieAPI(searchTvSerie)">
+                Cerca
             </button>
-        <!-- </form>
-        </div> -->
+        </div>
 
         <div class="movies_container">
             <div
@@ -62,7 +60,10 @@
                         <span> Lingua originale: </span><img class="flag" :src="'Flags/' + serie.original_language + '.svg'">
                     </span>
                     <div id="average_vote">
-                        Voto medio: 
+                        <span>
+                            Voto medio:
+                        </span>
+                        <br>
                         <span 
                         :class="i < getMovieVoteAverage(serie) ? 'star' : ''"
                         v-for="(starIcon, i) in 5"
@@ -180,15 +181,14 @@ export default {
         justify-content: center;
         input{
             height: 25px;
-            width: 15%;
             margin-top: 10px;
             margin-right: 10px;
             border-radius: 999px;
             padding: 10px;
             background-color: white;
-            input:focus{
+        }
+        input:focus{
             outline:none;
-            }
         }
         button{
             height: 25px;
@@ -212,7 +212,7 @@ export default {
             .singleMovie{
                 // border: 1px solid red;
                 width: calc((100% / 4) - 30px);
-                height: 350px;
+                height: 400px;
                 // padding: 15px;
                 background-color: #1b1e23;
                 // //border-radius: 25px;
@@ -224,16 +224,15 @@ export default {
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;
-                .singleMovie:hover{
-                    background-color: black;
-                    opacity: 0.2;
-                }
                 .movie_info{
+                    width: 100%;
+                    height: 100%;
                     color: white;
                     display: flex;
                     flex-direction: column;
-                    justify-content: space-between;
-                    // display: none;
+                    justify-content: center;
+                    align-items: center;
+                    visibility: hidden;
                     #title{
                         height: 30%;
                         font-size: 22px;
@@ -268,6 +267,11 @@ export default {
                         }
                     }
                 }
+            }
+            .singleMovie:hover .movie_info{
+                background-color: black;
+                opacity: 0.8;
+                visibility: visible;
             }
         }
     }
