@@ -22,30 +22,53 @@
             v-for="movie in movies"
             :key="movie.id"
             >
-                <h2>{{movie.title}}</h2>
+                <img class="poster" :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`" alt="">
+                <div class="movie_info">
+                    <span id="title">
+                        {{movie.title}}
+                    </span>
+                    <span id="original_title">
+                        {{movie.original_title}}
+                    </span>
+                    <span id="original_language">
+                        <span> Lingua originale: </span><img class="flag" :src="'Flags/' + movie.original_language + '.svg'">
+                    </span>
+                    <div id="average_vote">
+                        Voto medio: 
+                        <span 
+                        :class="i < getMovieVoteAverage(movie) ? 'star' : ''"
+                        v-for="(starIcon, i) in 5"
+                        :key="i"
+                        >
+                            &#9733;
+                        </span>
+                    </div>
+                </div>
+                <!-- <h2>{{movie.title}}</h2>
                 <h3>{{movie.original_title}}</h3>
                 <h4>Lingua originale: <img :src="'Flags/' + movie.original_language + '.svg'"></h4>
                 <div>Voto medio: 
                     <span 
                     :class="i < getMovieVoteAverage(movie) ? 'star' : ''"
-                    v-for="(startIcon, i) in 5"
+                    v-for="(starIcon, i) in 5"
                     :key="i"
                     >
                     &#9733;
                     </span>
-                </div>
+                </div> -->
                 
             </div>
-            <div
+            <!-- <div
             class="singleMovie"
             v-for="serie in series"
             :key="serie.id"
             >
+                <img :src="`https://image.tmdb.org/t/p/w342${serie.poster_path}`" alt="serie.name">
                 <h2>{{serie.name}}</h2>
                 <h3>{{serie.original_name}}</h3>
                 <h4>Lingua originale: <img :src="'Flags/' + movie.original_language + '.svg'"></h4>
                 <h4>Voto medio: {{serie.vote_average}}</h4>
-            </div>
+            </div> -->
         </div>
     </main>
 </template>
@@ -145,6 +168,13 @@ export default {
     //         transform: scale(0.9);
     //     }
     // }
+    main{
+        //border: 3px dashed yellow;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     input{
         height: 25px;
         width: 15%;
@@ -167,38 +197,76 @@ export default {
     }
     .movies_container{
         margin-top: 10px;
-        padding: 10px 20px;
-        width: 100%;
+        // padding: 10px 20px;
+        width: 80%;
         // border: 1px solid blue;
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-        gap: 10px;
+        gap: 30px;
+        //border: 3px solid purple;
         .singleMovie{
             // border: 1px solid red;
-            width: 23%;
-            padding: 15px;
+            width: calc((100% / 6) - 30px);
+            height: 350px;
+            // padding: 15px;
             background-color: #1b1e23;
-            border-radius: 25px;
+            // //border-radius: 25px;
+            // display: flex;
+            // flex-direction: column;
+            // align-items: center;
+            // gap: 5px;
+            border: 4px solid white;
+            position: relative;
+            .poster {
+            width: 100%;
+            height: 100%;
+            // opacity: 0.2;
+        } .movie_info{
+            color: white;
+            position: absolute;
+            top: 10%;
+            left: 10%;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            display: none;
+            #title{
+            height: 30%;
+            font-size: 22px;
+            font-weight: 600;
+            padding: 5px;
+            } #original_title{
+            height: 20%;
+            font-size: 18px;
+            padding: 5px;
+            } #original_language{
+            height: 30%;
+            font-size: 14px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 5px;
-            border: 4px solid white;
-        } h2{
-            color: red;
-            height: 50%;
-            background-color: none;
-        } h3{
-            color: gold;
-            height: 20%;
-        } h4{
-            color: silver;
-            height: 20%;
+                span{
+                    padding: 5px;
+                }
+                img{
+                    max-width: 30%;
+                    max-height: 20%;
+                }
+            } #average_vote{
+                height: 20%;
+            }
+        } .poster:hover{
+            opacity: 0.2;
+        } .movie_info:hover{
+            display: block;
         }
     }
+}
     .star{
-        color: red;
+        color: gold;
     }
 </style>

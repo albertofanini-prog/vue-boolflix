@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Netflix logo" src="./assets/Netflix_2015_logo.svg">
+    <img id="logo" alt="Netflix logo" src="./assets/Netflix_2015_logo.svg">
     <BoolflixMain/>
   </div>
 </template>
@@ -30,7 +30,8 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  img{
+  //border: 5px solid blue;
+  #logo{
     padding-top: 20px;
     max-width: 20%;
     max-height: 100px
