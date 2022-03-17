@@ -25,7 +25,15 @@
                 <h2>{{movie.title}}</h2>
                 <h3>{{movie.original_title}}</h3>
                 <h4>Lingua originale: <img :src="'Flags/' + movie.original_language + '.svg'"></h4>
-                <h4>Voto medio: {{movie.vote_average}}</h4>
+                <div>Voto medio: 
+                    <span 
+                    :class="i < getMovieVoteAverage(movie) ? 'star' : ''"
+                    v-for="(startIcon, i) in 5"
+                    :key="i"
+                    >
+                    &#9733;
+                    </span>
+                </div>
                 
             </div>
             <div
@@ -69,6 +77,7 @@ export default {
             })
             .then((response) =>{
                 this.movies = response.data.results;
+                console.log(response.data);
             })
         },
         searchTvSerieAPI(input){
@@ -82,9 +91,15 @@ export default {
             })
             .then((response) =>{
                 this.series = response.data.results;
-                console.log(response.data)
+                console.log(response.data);
             })
         },
+        getMovieVoteAverage: function (movie){
+            return Math.ceil(movie.vote_average / 2);
+        },
+        getSerieVoteAverage: function (serie){
+            return Math.ceil(serie.vote_average / 2)
+        }
     },
 }
 </script>
@@ -182,5 +197,8 @@ export default {
             color: silver;
             height: 20%;
         }
+    }
+    .star{
+        color: red;
     }
 </style>
