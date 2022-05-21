@@ -133,97 +133,63 @@ export default {
 </script>
 
 <style lang="scss">
-    // .form_container{
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-    //     overflow: hidden;
-    //     padding-top: 15px;
-    //     form{
-    //         position: relative;
-    //     }
-    //     .input_1{
-    //         display: block;
-    //         width: 100%;
-    //         padding: 10px 20px 10px 10px;
-    //         border: 2px solid #e50913;
-    //         border-radius: 20px;
-    //         color: #e50913;
-    //     }
-
-    //     .input_1::placeholder{
-    //         color: #e50913;
-    //     }
-
-    //     .input_2{
-    //         position: absolute  ;
-    //         right: 5px;
-    //         top: 5px;
-    //         display: block;
-    //         width: 40%;
-    //         padding: 5px 20px 5px 10px;
-    //         background-color: #e50913;
-    //         border: 2px solid #e50913;
-    //         border-radius: 0 20px 20px 0;
-    //         color: #fff;
-    //         transition: 0.5 ease;
-    //     }
-
-    //     .input_2:active{
-    //         transform: scale(0.9);
-    //     }
-    // }
     main{
         //border: 3px dashed yellow;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        input{
-            height: 25px;
-            margin-top: 10px;
-            margin-right: 10px;
-            border-radius: 999px;
-            padding: 10px;
-            background-color: white;
-        }
-        input:focus{
-            outline:none;
-        }
-        button{
-            height: 25px;
-            margin-top: 10px;
-            padding: 5px 10px;
-            border-radius: 999px;
-            cursor: pointer;
-            background-color: gray;
+        width: 90%;
+        .form_container{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0px;
+            max-height: 10%;
+            input{
+                max-height: 35px;
+                margin-right: 10px;
+                border-radius: 999px;
+                padding: 10px;
+                background-color: white;
+                width: 100%;
+            }
+            input:focus{
+                outline:none;
+            }
+            button{
+                height: 35px;
+                padding: 5px 10px;
+                border-radius: 999px;
+                cursor: pointer;
+                background-color: gray;
+            }
         }
         .movies_container{
             margin-top: 10px;
             // padding: 10px 20px;
-            width: 80%;
+            width: 100%;
             // border: 1px solid blue;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             gap: 30px;
+            padding-bottom: 5%;
             //border: 3px solid purple;
             .singleMovie{
                 // border: 1px solid red;
                 width: calc((100% / 4) - 30px);
-                height: 400px;
+                height: 600px;
                 // padding: 15px;
                 background-color: #1b1e23;
                 // //border-radius: 25px;
                 display: flex;
-                align-items: center;
-                justify-content: center;
                 gap: 5px;
                 border: 4px solid white;
                 background-repeat: no-repeat;
                 background-position: center;
-                background-size: cover;
+                background-size: 100% 100%;
                 .movie_info{
                     width: 100%;
                     height: 100%;
@@ -234,18 +200,15 @@ export default {
                     align-items: center;
                     visibility: hidden;
                     #title{
-                        height: 30%;
                         font-size: 22px;
                         font-weight: 600;
                         padding: 5px;
                     }
                     #original_title{
-                        height: 20%;
                         font-size: 18px;
                         padding: 5px;
                     }
                     #original_language{
-                        height: 30%;
                         font-size: 14px;
                         padding: 5px;
                         display: flex;
@@ -272,6 +235,50 @@ export default {
                 background-color: black;
                 opacity: 0.8;
                 visibility: visible;
+            }
+            @media only screen and (max-width: 1400px) {
+                .singleMovie{
+                    width: calc((100% / 3) - 20px);
+                    height: 500px;
+                }
+            }
+            @media only screen and (max-width: 1100px) {
+                .singleMovie{
+                    width: calc((100% / 3) - 30px);
+                    height: 400px;
+                }
+            }
+            @media only screen and (max-width: 1000px) {
+                .singleMovie{
+                    width: calc((100% / 2) - 30px);
+                    height: 500px;
+                }
+            }
+            @media only screen and (max-width: 700px) {
+                .movies_container{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 10px;
+                }
+                .singleMovie{
+                    width: 70%;
+                    height: 400px;
+                }
+            }
+            @media only screen and (max-width: 500px) {
+                .movies_container{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 10px;
+                }
+                .singleMovie{
+                    width: 80%;
+                    height: 400px;
+                }
             }
         }
     }

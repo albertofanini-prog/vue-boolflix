@@ -31,6 +31,11 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   //border: 5px solid blue;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   #logo{
     padding-top: 20px;
     max-width: 20%;
